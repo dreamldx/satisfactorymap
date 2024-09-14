@@ -19,5 +19,5 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag dreamldx/santisfactorymap:$(date +%s)
-        docker push dreamldx/santisfactorymap:$(date +%s)
+        docker build . --file Dockerfile --tag dreamldx/santisfactorymap:$(date +%Y%m%d)
+        docker push dreamldx/santisfactorymap:$(date +%Y%m%d)
