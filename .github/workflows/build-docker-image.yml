@@ -17,7 +17,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Generate variables
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag dreamldx/santisfactorymap:$(date +%Y%m%d)
-        docker push dreamldx/santisfactorymap:$(date +%Y%m%d)
+        docker build . --file Dockerfile --tag dreamldx/santisfactorymap:${{ steps.vars.outputs.sha_short }}
+        docker push dreamldx/santisfactorymap:${{ steps.vars.outputs.sha_short }}
